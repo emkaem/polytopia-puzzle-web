@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "example-001",
+  "title": "Beginner exercise: Capture the city",
+  "description": "A simple puzzle to get familiar with the controls. Move the warrior to the city to win.",
+  "grid": {
+    "shape": "rhombus",
+    "size": 4
+  },
+  "tiles": [
+    { "q": 0, "r": 0, "terrain": "plains", "unit": { "type": "warrior", "owner": "player1" } },
+    { "q": 1, "r": 0, "terrain": "plains" },
+    { "q": 2, "r": 0, "terrain": "forest" },
+    { "q": 3, "r": 0, "terrain": "city" },
+    { "q": 0, "r": 1, "terrain": "water" },
+    { "q": 1, "r": 1, "terrain": "plains" },
+    { "q": 2, "r": 1, "terrain": "plains" },
+    { "q": 3, "r": 1, "terrain": "mountain" }
+  ],
+  "objectives": [
+    {
+      "type": "capture",
+      "target": "3,0",
+      "turns": 5
+    }
+  ],
+  "constraints": {
+    "maxTurns": 5,
+    "allowedUnits": ["warrior"]
+  }
+}
