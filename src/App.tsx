@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { PuzzlesPage } from './pages/PuzzlesPage'
+import { CalculatorPage } from './pages/CalculatorPage'
 import './index.css'
 
 function Nav() {
@@ -19,6 +20,11 @@ function Nav() {
           <li>
             <NavLink to="/puzzles" className={({ isActive }) => isActive ? 'active' : ''}>
               Puzzles
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/calculator" className={({ isActive }) => isActive ? 'active' : ''}>
+              Calculator
             </NavLink>
           </li>
         </ul>
@@ -42,6 +48,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/puzzles" element={<PuzzlesPage />} />
+        <Route path="/calculator" element={<CalculatorPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

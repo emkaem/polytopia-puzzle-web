@@ -465,3 +465,534 @@ a:hover {
   border-radius: 2px;
   flex-shrink: 0;
 }
+
+/* ── Section header desc ──────────────────────────────────────────────────── */
+
+.section-header__desc {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin: 8px 0 0;
+}
+
+/* ── Calculator grid ──────────────────────────────────────────────────────── */
+
+/*
+  Shared grid: 3 columns, N+2 rows.
+  Row 1:   column headers
+  Row 2…N+1: [attacker card] [round strip] [defender spans all]
+  Row N+2: [add button]      [—]
+*/
+.calc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 10px;
+  align-items: start;
+  padding: 32px 0 64px;
+}
+
+@media (max-width: 860px) {
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+  .calc-grid__strip-cell,
+  .calc-grid__defender-cell {
+    grid-column: 1;
+  }
+}
+
+/* Headers: row 1 */
+.calc-grid__header {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-bottom: 4px;
+  /* Explicit columns via nth-child handled by DOM order */
+}
+
+.calc-column__hint {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.72rem;
+}
+
+/* Attacker card cell: col 1, auto row */
+.calc-grid__attacker-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  grid-column: 1;
+}
+
+.calc-grid__attacker-cell--drag-over .unit-card {
+  outline: 2px dashed var(--color-accent-2);
+  outline-offset: 2px;
+}
+
+/* Round strip cell: col 2, same auto row as the matching attacker */
+.calc-grid__strip-cell {
+  grid-column: 2;
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Add button cell: col 1, last row */
+.calc-grid__add-cell {
+  grid-column: 1;
+}
+
+/* Defender cell: col 3, spans all attacker rows via inline style */
+.calc-grid__defender-cell {
+  grid-column: 3;
+  grid-row: 2; /* overridden by inline style for span */
+  align-self: start;
+}
+
+
+/* ── Unit card ────────────────────────────────────────────────────────────── */
+
+.unit-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  column-gap: 10px;
+  flex: 1;
+}
+
+.unit-card--attacker {
+  border-color: rgba(91, 155, 213, 0.4);
+}
+
+.unit-card--defender {
+  border-color: rgba(224, 85, 85, 0.35);
+}
+
+/* Left column: sprite area — stretches to full card height */
+.unit-card__sprite-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  border-radius: 6px;
+}
+
+.unit-card__sprite-area[draggable='true'] {
+  cursor: grab;
+}
+.unit-card__sprite-area[draggable='true']:active {
+  cursor: grabbing;
+}
+
+.unit-card__sprite-area .unit-card__drag-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.unit-card__sprite-area .unit-card__remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Unit sprite — fills the left column width, height auto */
+.unit-card__unit-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* Defender sprite is mirrored to face the attacker (left) */
+.unit-card__unit-img--flipped {
+  transform: scaleX(-1);
+}
+
+/* Right column: stacked controls */
+.unit-card__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Controls header: select + stat chips */
+.unit-card__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.unit-card__header[draggable='true'] {
+  cursor: grab;
+}
+.unit-card__header[draggable='true']:active {
+  cursor: grabbing;
+}
+
+/* Custom unit dropdown */
+.unit-select {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.unit-select__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  color: var(--color-heading);
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  padding: 3px 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s;
+}
+.unit-select__trigger:hover {
+  border-color: var(--color-text-muted);
+}
+
+.unit-select__img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.unit-select__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unit-select__chevron {
+  font-size: 0.55rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.unit-select__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 20;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.unit-select__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+}
+.unit-select__option:hover {
+  background: var(--color-surface-2);
+}
+.unit-select__option--active {
+  color: var(--color-heading);
+  font-weight: 700;
+  background: var(--color-surface-2);
+}
+
+/* Inline stat chips in header */
+.unit-card__stats {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.unit-card__stat {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  white-space: nowrap;
+}
+
+.unit-card__remove {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  padding: 2px 5px;
+  cursor: pointer;
+  line-height: 1;
+  font-family: var(--font-sans);
+  transition: color 0.12s, border-color 0.12s;
+}
+.unit-card__remove:hover {
+  color: #e05555;
+  border-color: rgba(224, 85, 85, 0.4);
+}
+
+/* HP row */
+.unit-card__hp-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.unit-card__hp-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  width: 18px;
+}
+
+.unit-card__slider {
+  flex: 1;
+  accent-color: var(--color-accent-2);
+  cursor: pointer;
+}
+
+.unit-card__number {
+  width: 42px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  color: var(--color-heading);
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  padding: 3px 5px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.unit-card__number:focus {
+  outline: 2px solid var(--color-accent-2);
+  outline-offset: 1px;
+}
+
+.unit-card__hp-max {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* Bonus toggles */
+.unit-card__bonuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.unit-card__toggle {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  font-family: var(--font-sans);
+}
+.unit-card__toggle:hover {
+  color: var(--color-heading);
+  border-color: var(--color-text-muted);
+}
+.unit-card__toggle--active {
+  background: rgba(91, 155, 213, 0.2);
+  border-color: var(--color-accent-2);
+  color: var(--color-accent-2);
+}
+.unit-card__toggle--range {
+  background: rgba(126, 203, 161, 0.15);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ── Attacker list ────────────────────────────────────────────────────────── */
+
+.attacker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attacker-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.attacker-list__item--drag-over > .attacker-list__body {
+  outline: 2px dashed var(--color-accent-2);
+  border-radius: 12px;
+  outline-offset: 2px;
+}
+
+.attacker-list__order {
+  width: 18px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding-top: 10px;
+}
+
+.attacker-list__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.attacker-list__add {
+  align-self: flex-start;
+  margin-top: 2px;
+  font-size: 0.8rem;
+}
+
+/* ── Round strip ──────────────────────────────────────────────────────────── */
+
+.round-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 7px 8px;
+  font-size: 0.78rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.round-strip--skipped {
+  justify-content: center;
+  opacity: 0.45;
+}
+
+.round-strip__label {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.round-strip__side {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Attacker side: reversed so hp is on the left, dmg near center */
+.round-strip__side--attacker {
+  flex-direction: row-reverse;
+}
+
+.round-strip__arrow {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.round-strip__dmg {
+  font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.round-strip__dmg--hit {
+  color: #e05555;
+}
+
+.round-strip__dmg--retaliation {
+  color: var(--color-accent-warm);
+}
+
+.round-strip__bar-wrap {
+  flex: 1;
+  min-width: 24px;
+  height: 5px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 1;
+}
+
+/* RTL variant: bars grow from right to left (attacker side) */
+.round-strip__bar-wrap--rtl {
+  transform: scaleX(-1);
+}
+
+/* Ghost of original HP */
+.round-strip__bar-before {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+}
+
+.round-strip__bar-after {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.round-strip__hp {
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 0.72rem;
+}
+
+.round-strip__hp--dead {
+  color: #e05555;
+  font-weight: 700;
+}
