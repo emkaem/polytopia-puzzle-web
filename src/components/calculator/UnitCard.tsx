@@ -148,6 +148,7 @@ export function UnitCard(props: UnitCardProps) {
             value={config.unitId}
             onChange={handleUnitChange}
             onMouseDown={(e) => e.stopPropagation()}
+            useDefenderImages={isDefender}
           />
           <div className="unit-card__stats">
             <span className="unit-card__stat" title="Attack">⚔ {unitDef?.attack ?? config.attack}</span>
@@ -213,9 +214,10 @@ interface UnitSelectProps {
   value: string
   onChange: (id: string) => void
   onMouseDown?: (e: React.MouseEvent) => void
+  useDefenderImages?: boolean
 }
 
-function UnitSelect({ value, onChange, onMouseDown }: UnitSelectProps) {
+function UnitSelect({ value, onChange, onMouseDown, useDefenderImages }: UnitSelectProps) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -245,7 +247,7 @@ function UnitSelect({ value, onChange, onMouseDown }: UnitSelectProps) {
         onMouseDown={(e) => { e.stopPropagation(); setOpen((o) => !o) }}
       >
         {selected && (
-          <img src={selected.image} alt={selected.name} className="unit-select__img" />
+          <img src={useDefenderImages ? selected.defenderImage : selected.image} alt={selected.name} className={`unit-select__img${useDefenderImages ? ' unit-select__img--flipped' : ''}`} />
         )}
         <span className="unit-select__name">{selected?.name ?? '—'}</span>
         <span className="unit-select__chevron">{open ? '▲' : '▼'}</span>
@@ -264,7 +266,7 @@ function UnitSelect({ value, onChange, onMouseDown }: UnitSelectProps) {
                 setOpen(false)
               }}
             >
-              <img src={u.image} alt={u.name} className="unit-select__img" />
+              <img src={useDefenderImages ? u.defenderImage : u.image} alt={u.name} className={`unit-select__img${useDefenderImages ? ' unit-select__img--flipped' : ''}`} />
               <span>{u.name}</span>
             </button>
           ))}
