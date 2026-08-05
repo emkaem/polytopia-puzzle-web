@@ -6,7 +6,7 @@ import archerImg from '../units/Imperius_default_Archer.png'
 import riderImg from '../units/Imperius_default_Rider.png'
 import giantImg from '../units/Imperius_default_Giant.png'
 import defenderImg from '../units/Imperius_default_Defender.png'
-import mindbenderImg from '../units/Imperius_default_Mindbender.png'
+import mindBenderImg from '../units/Imperius_default_MindBender.png'
 import swordsmanImg from '../units/Imperius_default_Swordsman.png'
 import catapultImg from '../units/Imperius_default_Catapult.png'
 import cloakImg from '../units/Imperius_default_Cloak.png'
@@ -55,7 +55,7 @@ import archerDefImg from '../units-defender/Xin-xi_default_Archer.png'
 import riderDefImg from '../units-defender/Xin-xi_default_Rider.png'
 import giantDefImg from '../units-defender/Xin-xi_default_Giant.png'
 import defenderDefImg from '../units-defender/Xin-xi_default_Defender.png'
-import mindbenderDefImg from '../units-defender/Xin-xi_default_Mindbender.png'
+import mindBenderDefImg from '../units-defender/Xin-xi_default_MindBender.png'
 import swordsmanDefImg from '../units-defender/Xin-xi_default_Swordsman.png'
 import catapultDefImg from '../units-defender/Xin-xi_default_Catapult.png'
 import cloakDefImg from '../units-defender/Xin-xi_default_Cloak.png'
@@ -179,8 +179,8 @@ export const UNITS: UnitDefinition[] = [
     attack: 0,
     defence: 1,
     skills: ['stiff'],
-    image: mindbenderImg,
-    defenderImage: mindbenderDefImg,
+    image: mindBenderImg,
+    defenderImage: mindBenderDefImg,
     tribe: 'normal',
   },
   {
