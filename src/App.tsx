@@ -17,11 +17,7 @@ function Nav() {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/puzzles" className={({ isActive }) => isActive ? 'active' : ''}>
-              Puzzles
-            </NavLink>
-          </li>
+          {/* Puzzles tab temporarily hidden; page still accessible via /puzzles */}
           <li>
             <NavLink to="/calculator" className={({ isActive }) => isActive ? 'active' : ''}>
               Calculator
