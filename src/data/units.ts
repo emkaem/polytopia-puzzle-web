@@ -25,6 +25,30 @@ import bomberImg from '../units/Imperius_default_Bombership.png'
 import juggernautImg from '../units/Imperius_default_Juggernaut.png'
 import dinghyImg from '../units/Imperius_default_Cloak_Boat.png'
 import pirateImg from '../units/Imperius_default_Pirate.png'
+import polytaurImg from '../units/Imperius_default_Polytaur.png'
+import dragonEggImg from '../units/Imperius_default_DragonEgg.png'
+import babyDragonImg from '../units/Imperius_default_BabyDragon.png'
+import fireDragonImg from '../units/Imperius_default_FireDragon.png'
+import iceArcherImg from '../units/Imperius_default_IceArcher.png'
+import battleSledImg from '../units/Imperius_default_BattleSled.png'
+import mooniImg from '../units/Imperius_default_Mooni.png'
+import iceFortressImg from '../units/Imperius_default_IceFortress.png'
+import gaamiImg from '../units/Imperius_default_Gaami.png'
+import hexapodImg from '../units/Imperius_default_Hexapod.png'
+import kitonImg from '../units/Imperius_default_Kiton.png'
+import phychiImg from '../units/Imperius_default_Phychi.png'
+import shamanImg from '../units/Imperius_default_Shaman.png'
+import exidaImg from '../units/Imperius_default_Exida.png'
+import raychiImg from '../units/Imperius_default_Raychi.png'
+import doomuxImg from '../units/Imperius_default_Doomux.png'
+import centipedeImg from '../units/Imperius_default_Centipede.png'
+import centipedeSegmentImg from '../units/Imperius_default_Segment.png'
+import mothImg from '../units/Imperius_default_Moth.png'
+import insectEggImg from '../units/Imperius_default_InsectEgg.png'
+import larvaImg from '../units/Imperius_default_Larva.png'
+import boomchiImg from '../units/Imperius_default_Boomchi.png'
+import mantisImg from '../units/Imperius_default_Mantis.png'
+import livingIslandImg from '../units/Imperius_default_Island.png'
 
 import warriorDefImg from '../units-defender/Xin-xi_default_Warrior.png'
 import archerDefImg from '../units-defender/Xin-xi_default_Archer.png'
@@ -50,8 +74,32 @@ import bomberDefImg from '../units-defender/Xin-xi_default_Bombership.png'
 import juggernautDefImg from '../units-defender/Xin-xi_default_Juggernaut.png'
 import dinghyDefImg from '../units-defender/Xin-xi_default_Cloak_Boat.png'
 import pirateDefImg from '../units-defender/Xin-xi_default_Pirate.png'
+import polytaurDefImg from '../units-defender/Xin-xi_default_Polytaur.png'
+import dragonEggDefImg from '../units-defender/Xin-xi_default_DragonEgg.png'
+import babyDragonDefImg from '../units-defender/Xin-xi_default_BabyDragon.png'
+import fireDragonDefImg from '../units-defender/Xin-xi_default_FireDragon.png'
+import iceArcherDefImg from '../units-defender/Xin-xi_default_IceArcher.png'
+import battleSledDefImg from '../units-defender/Xin-xi_default_BattleSled.png'
+import mooniDefImg from '../units-defender/Xin-xi_default_Mooni.png'
+import iceFortressDefImg from '../units-defender/Xin-xi_default_IceFortress.png'
+import gaamiDefImg from '../units-defender/Xin-xi_default_Gaami.png'
+import hexapodDefImg from '../units-defender/Xin-xi_default_Hexapod.png'
+import kitonDefImg from '../units-defender/Xin-xi_default_Kiton.png'
+import phychiDefImg from '../units-defender/Xin-xi_default_Phychi.png'
+import shamanDefImg from '../units-defender/Xin-xi_default_Shaman.png'
+import exidaDefImg from '../units-defender/Xin-xi_default_Exida.png'
+import raychiDefImg from '../units-defender/Xin-xi_default_Raychi.png'
+import doomuxDefImg from '../units-defender/Xin-xi_default_Doomux.png'
+import centipedeDefImg from '../units-defender/Xin-xi_default_Centipede.png'
+import centipedeSegmentDefImg from '../units-defender/Xin-xi_default_Segment.png'
+import mothDefImg from '../units-defender/Xin-xi_default_Moth.png'
+import insectEggDefImg from '../units-defender/Xin-xi_default_InsectEgg.png'
+import larvaDefImg from '../units-defender/Xin-xi_default_Larva.png'
+import boomchiDefImg from '../units-defender/Xin-xi_default_Boomchi.png'
+import mantisDefImg from '../units-defender/Xin-xi_default_Mantis.png'
+import livingIslandDefImg from '../units-defender/Xin-xi_default_Island.png'
 
-export type Skill = 'fortify' | 'stiff' | 'surprise' | 'static' | 'persist' | 'splash' | 'stomp'
+export type Skill = 'fortify' | 'stiff' | 'surprise' | 'static' | 'persist' | 'splash' | 'stomp' | 'ranged' | 'freeze' | 'poison' | 'double attack' | 'explode'
 export type Tribe = 'normal' | 'cymanti' | 'aquarion' | 'elyrion' | 'polaris'
 
 export interface UnitDefinition {
@@ -86,7 +134,7 @@ export const UNITS: UnitDefinition[] = [
     maxHealth: 10,
     attack: 2,
     defence: 1,
-    skills: ['fortify'],
+    skills: ['fortify', 'ranged'],
     image: archerImg,
     defenderImage: archerDefImg,
     tribe: 'normal',
@@ -152,7 +200,7 @@ export const UNITS: UnitDefinition[] = [
     maxHealth: 10,
     attack: 4,
     defence: 0,
-    skills: ['stiff'],
+    skills: ['stiff', 'ranged'],
     image: catapultImg,
     defenderImage: catapultDefImg,
     tribe: 'normal',
@@ -218,7 +266,7 @@ export const UNITS: UnitDefinition[] = [
     maxHealth: 10,
     attack: 4,
     defence: 0,
-    skills: ['stiff'],
+    skills: ['stiff', 'ranged'],
     image: pufferImg,
     defenderImage: pufferDefImg,
     tribe: 'aquarion',
@@ -240,7 +288,7 @@ export const UNITS: UnitDefinition[] = [
     maxHealth: 10,
     attack: 2.5,
     defence: 1,
-    skills: ['persist'],
+    skills: ['persist', 'ranged'],
     image: tridentionImg,
     defenderImage: tridentionDefImg,
     tribe: 'aquarion',
@@ -284,7 +332,7 @@ export const UNITS: UnitDefinition[] = [
     maxHealth: 10,
     attack: 2,
     defence: 1,
-    skills: ['static'],
+    skills: ['static', 'ranged'],
     image: scoutImg,
     defenderImage: scoutDefImg,
     tribe: 'normal',
@@ -295,7 +343,7 @@ export const UNITS: UnitDefinition[] = [
     maxHealth: 10,
     attack: 3,
     defence: 2,
-    skills: ['stiff', 'static', 'splash'],
+    skills: ['stiff', 'static', 'splash', 'ranged'],
     image: bomberImg,
     defenderImage: bomberDefImg,
     tribe: 'normal', 
@@ -333,6 +381,271 @@ export const UNITS: UnitDefinition[] = [
     defenderImage: pirateDefImg,
     tribe: 'normal',
   },
+  {
+    id: 'polytaur',
+    name: 'Polytaur',
+    maxHealth: 15,
+    attack: 3,
+    defence: 1,
+    skills: ['fortify', 'static'],
+    image: polytaurImg,
+    defenderImage: polytaurDefImg,
+    tribe: 'elyrion',
+  },
+  {
+    id: 'dragonEgg',
+    name: 'Dragon Egg',
+    maxHealth: 10,
+    attack: 0,
+    defence: 2,
+    skills: ['fortify', 'stiff', 'static'],
+    image: dragonEggImg,
+    defenderImage: dragonEggDefImg,
+    tribe: 'elyrion',
+  },
+  {
+    id: 'babyDragon',
+    name: 'Baby Dragon',
+    maxHealth: 15,
+    attack: 3,
+    defence: 3,
+    skills: ['static'],
+    image: babyDragonImg,
+    defenderImage: babyDragonDefImg,
+    tribe: 'elyrion',
+  },
+  {
+    id: 'fireDragon',
+    name: 'Fire Dragon',
+    maxHealth: 20,
+    attack: 4,
+    defence: 3,
+    skills: ['stiff', 'static', 'splash', 'ranged'],
+    image: fireDragonImg,
+    defenderImage: fireDragonDefImg,
+    tribe: 'elyrion',
+  },
+  {
+    id: 'iceArcher',
+    name: 'Ice Archer',
+    maxHealth: 10,
+    attack: 1,
+    defence: 1,
+    skills: ['fortify', 'ranged', 'freeze'],
+    image: iceArcherImg,
+    defenderImage: iceArcherDefImg,
+    tribe: 'polaris',
+  },
+  {
+    id: 'battleSled',
+    name: 'Battle Sled',
+    maxHealth: 15,
+    attack: 3,
+    defence: 2,
+    skills: [],
+    image: battleSledImg,
+    defenderImage: battleSledDefImg,
+    tribe: 'polaris',
+  },
+  {
+    id: 'mooni',
+    name: 'Mooni',
+    maxHealth: 10,
+    attack: 0,
+    defence: 1,
+    skills: ['freeze', 'stiff', 'static'],
+    image: mooniImg,
+    defenderImage: mooniDefImg,
+    tribe: 'polaris',
+  },
+  {
+    id: 'iceFortress',
+    name: 'Ice Fortress',
+    maxHealth: 20,
+    attack: 4,
+    defence: 3,
+    skills: ['static'],
+    image: iceFortressImg,
+    defenderImage: iceFortressDefImg,
+    tribe: 'polaris',
+  },
+  {
+    id: 'gaami',
+    name: 'Gaami',
+    maxHealth: 30,
+    attack: 4,
+    defence: 3,
+    skills: ['freeze', 'static'],
+    image: gaamiImg,
+    defenderImage: gaamiDefImg,
+    tribe: 'polaris',
+  },
+  {
+    id: 'hexapod',
+    name: 'Hexapod',
+    maxHealth: 5,
+    attack: 3,
+    defence: 1,
+    skills: [],
+    image: hexapodImg,
+    defenderImage: hexapodDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'kiton',
+    name: 'Kiton',
+    maxHealth: 15,
+    attack: 1,
+    defence: 3,
+    skills: ['poison'],
+    image: kitonImg,
+    defenderImage: kitonDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'phychi',
+    name: 'Phychi',
+    maxHealth: 5,
+    attack: 0.7,
+    defence: 2,
+    skills: ['poison', 'surprise', 'double attack', 'ranged'],
+    image: phychiImg,
+    defenderImage: phychiDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'shaman',
+    name: 'Shaman',
+    maxHealth: 10,
+    attack: 1,
+    defence: 1,
+    skills: [],
+    image: shamanImg,
+    defenderImage: shamanDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'exida',
+    name: 'Exida',
+    maxHealth: 10,
+    attack: 3,
+    defence: 1,
+    skills: ['poison', 'ranged', 'splash'],
+    image: exidaImg,
+    defenderImage: exidaDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'raychi',
+    name: 'Raychi',
+    maxHealth: 10,
+    attack: 3,
+    defence: 2,
+    skills: [],
+    image: raychiImg,
+    defenderImage: raychiDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'doomux',
+    name: 'Doomux',
+    maxHealth: 20,
+    attack: 3.5,
+    defence: 2,
+    skills: ['static', 'explode'],
+    image: doomuxImg,
+    defenderImage: doomuxDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'centipede',
+    name: 'Centipede',
+    maxHealth: 20,
+    attack: 4,
+    defence: 3,
+    skills: ['static'],
+    image: centipedeImg,
+    defenderImage: centipedeDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'centipedeSegment',
+    name: 'Centipede Segment',
+    maxHealth: 10,
+    attack: 2,
+    defence: 2,
+    skills: ['static', 'stiff', 'explode'],
+    image: centipedeSegmentImg,
+    defenderImage: centipedeSegmentDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'moth',
+    name: 'Moth',
+    maxHealth: 10,
+    attack: 2,
+    defence: 0.1,
+    skills: ['static', 'stiff', 'poison'],
+    image: mothImg,
+    defenderImage: mothDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'insectEgg',
+    name: 'Insect Egg',
+    maxHealth: 10,
+    attack: 2,
+    defence: 3,
+    skills: ['static', 'stiff', 'explode'],
+    image: insectEggImg,
+    defenderImage: insectEggDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'larva',
+    name: 'Larva',
+    maxHealth: 10,
+    attack: 2,
+    defence: 2,
+    skills: ['static', 'surprise'],
+    image: larvaImg,
+    defenderImage: larvaDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'boomchi',
+    name: 'Boomchi',
+    maxHealth: 10,
+    attack: 3,
+    defence: 3,
+    skills: ['stiff', 'explode'],
+    image: boomchiImg,
+    defenderImage: boomchiDefImg,
+    tribe: 'cymanti',
+  },
+  {
+    id: 'mantis',
+    name: 'Mantis',
+    maxHealth: 15,
+    attack: 3,
+    defence: 3,
+    skills: [],
+    image: mantisImg,
+    defenderImage: mantisDefImg,
+    tribe: 'cymanti',
+  },  
+  {
+    id: 'livingIsland',
+    name: 'Living Island',
+    maxHealth: 20,
+    attack: 4,
+    defence: 4,
+    skills: ['static', 'stomp', 'poison'],
+    image: livingIslandImg,
+    defenderImage: livingIslandDefImg,
+    tribe: 'cymanti',
+  }
+
 ]
 
 export const UNIT_MAP: Record<string, UnitDefinition> = Object.fromEntries(
